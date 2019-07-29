@@ -10,8 +10,9 @@ class PivotTable extends Component {
     this.state = {
       abrir: false
     };
+    console.log(this);
+    
   }
-
   
 
   handleClickOpen = () => {
@@ -35,13 +36,15 @@ class PivotTable extends Component {
       handler: this.handleClickOpen,
       icon: null//this.icons.open
     }
-    toolbar.getTabs = () => {   
-      console.log(this.icons);  
-      // add new tab
-      tabs.unshift(opcionAjustar);
+    
+    toolbar.getTabs = function() {//Si no se utiliza function se pierde protypes y se pierden iconos            
+      delete tabs[0];
+      tabs.splice(2,0,{...opcionAjustar, icon : this.icons.open });
       return tabs;
-    };   
+    };    
   }
+
+
 
   render() {
     let datasourceCustom = {
